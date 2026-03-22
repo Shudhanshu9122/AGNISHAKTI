@@ -37,10 +37,15 @@ _last_alert_time = {}
 # Model setup
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"[INFO] Using device: {device}")
+
+# Resolve the absolute path of the model file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "best.pt")
+
 try:
-    model = YOLO("best.pt").to(device)
+    model = YOLO(MODEL_PATH).to(device)
     class_names = model.names
-    print("[INFO] YOLO model loaded successfully.")
+    print(f"[INFO] YOLO model loaded from {MODEL_PATH}")
 except Exception as e:
     print(f"[ERROR] Failed to load model: {e}")
     # Exit or handle the error appropriately if the model is critical
