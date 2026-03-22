@@ -1,0 +1,10 @@
+opencv-python-headless
+torch
+numpy
+requests
+fastapi
+uvicorn
+ultralytics
+python-dotenv
+python-multipart
+dill
