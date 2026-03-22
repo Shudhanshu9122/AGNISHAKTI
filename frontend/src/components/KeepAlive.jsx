@@ -10,7 +10,9 @@ import { useEffect } from 'react';
  */
 export default function KeepAlive() {
   useEffect(() => {
-    const backendUrl = process.env.NEXT_PUBLIC_PYTHON_SERVICE_URL || 'http://localhost:8000';
+    // Trim trailing slash to prevent double-slash issues (e.g., //health)
+    const rawUrl = process.env.NEXT_PUBLIC_PYTHON_SERVICE_URL || 'http://localhost:8000';
+    const backendUrl = rawUrl.replace(/\/$/, '');
     
     const pingBackend = async () => {
       try {
