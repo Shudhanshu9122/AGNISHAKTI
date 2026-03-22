@@ -219,6 +219,24 @@ def process_video_stream(video_source, camera_id=None):
 
 
 # ------------------------------
+# Health / Keep-Alive Endpoint
+# (UptimeRobot pings this every 10 min to prevent Render from sleeping)
+# ------------------------------
+@app.get("/health")
+def health_check():
+    """Lightweight health check endpoint for uptime monitoring."""
+    return JSONResponse(content={
+        "status": "ok",
+        "service": "AgniShakti AI Backend",
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    })
+
+@app.get("/ping")
+def ping():
+    """Simple ping endpoint — returns pong."""
+    return JSONResponse(content={"message": "pong"})
+
+# ------------------------------
 # API Endpoints
 # ------------------------------
 @app.post("/upload_video")
